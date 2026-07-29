@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "items_count_plus",
+  "version": "${version}",
+  "name": "Items Count Plus",
+  "description": "Displays the total count of blocks and tool durability on your screen",
+  "authors": ["Bunograd"],
+  "contact": {},
+  "license": "MIT",
+  "icon": "icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "itemsCountPlus.client.itemsCountPlusClient"
+    ],
+    "modmenu": [
+      "itemsCountPlus.client.config.ModMenuIntegration"
+    ]
+  },
+  "depends": {
+    "fabricloader": "*",
+    "minecraft": "1.21.11",
+    "fabric-api": "*"
+  }
+}

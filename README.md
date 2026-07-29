@@ -1,0 +1,1 @@
+A highly customizable HUD mod. It displays the combined count of identical blocks across your entire inventory. For tools and armor, it shows the exact remaining durability alongside a sleek progress bar. Perfectly adapts to both left-handed and right-handed players.

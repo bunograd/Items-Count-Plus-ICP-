@@ -1,6 +1,6 @@
 plugins {
     // Updated Loom to a version that properly processes 1.21.11 assets and supports Java 21 toolchains
-    id 'fabric-loom' version '1.8-SNAPSHOT'
+    id 'fabric-loom' version '1.7-SNAPSHOT'
     id 'maven-publish'
 }
 
@@ -8,7 +8,7 @@ version = project.mod_version
 group = project.maven_group
 
 base {
-    archivesName = project.archives_base_name
+    archivesName = "items-count-plus+fabric"
 }
 
 repositories {
@@ -91,3 +91,13 @@ publishing {
     repositories {
     }
 }
+
+// Enforces that the production-ready jar with all your metadata is built explicitly
+tasks.named('remapJar') {
+    archiveClassifier = ''
+}
+
+tasks.named('jar') {
+    archiveClassifier = 'dev'
+}
+

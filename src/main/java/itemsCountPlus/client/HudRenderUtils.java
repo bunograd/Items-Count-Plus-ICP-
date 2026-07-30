@@ -5,6 +5,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
+import net.minecraft.util.math.MathHelper;
 
 public class HudRenderUtils {
 
@@ -48,7 +49,7 @@ public class HudRenderUtils {
         String valueText = "";
         boolean isDamageable = stack.isDamageable();
 
-        // Calculate durability or total item count in the whole inventory
+        // Расчет прочности или общего количества предметов в инвентаре (Полностью совместимо с 1.21.x)
         if (isDamageable) {
             int maxDamage = stack.getMaxDamage();
             int currentDamage = stack.getDamage();
@@ -64,18 +65,18 @@ public class HudRenderUtils {
             valueText = String.valueOf(totalCount);
         }
 
-        // Calculate dimensions of UI elements
+        // Выравнивание габаритов интерфейса (Иконка занимает стандартные 16х16 или 11х11 в зависимости от сетки)
         int leftElementWidth = useIcons ? 14 : client.textRenderer.getWidth(letter);
         String numberPart = ": " + valueText;
         int textWidth = leftElementWidth + client.textRenderer.getWidth(numberPart);
         int textHeight = 8;
 
-        // Padding for the semi-transparent background plate
+        // Настройка отступов для заднего фона
         int paddingX = 4;
-        int paddingYTop = useIcons ? 5 : 3;
-        int paddingYBottom = isDamageable ? 5 : (useIcons ? 5 : 3);
+        int paddingYTop = useIcons ? 4 : 3;
+        int paddingYBottom = isDamageable ? 5 : (useIcons ? 4 : 3);
 
-        // Draw the semi-transparent background (0x7F000000)
+        // Отрисовка полупрозрачной плашки фона (0x7F000000)
         context.fill(
                 x - paddingX,
                 y - paddingYTop,
@@ -84,24 +85,20 @@ public class HudRenderUtils {
                 0x7F000000
         );
 
-        // Render the icon or the letter
+        // Безопасный рендеринг иконки или буквы без использования MatrixStack
         if (useIcons) {
-            context.getMatrices().pushMatrix();
-            context.getMatrices().translate((float) x, (float) (y - 3));
-            // Increased scale to 0.75F
-            context.getMatrices().scale(0.75F, 0.75F);
-
-            context.drawItem(stack, 0, 0);
-            context.getMatrices().popMatrix();
+            // Напрямую передаем координаты в DrawContext. В 1.21.11 drawItem отрисовывает
+            // предмет в оригинальном размере. Для смещения по высоте используем y - 4.
+            context.drawItem(stack, x, y - 4);
         } else {
             int argbColor = settings.letterColor | 0xFF000000;
             context.drawTextWithShadow(client.textRenderer, letter, x, y, argbColor);
         }
 
-        // Draw the text value of count/durability
+        // Отрисовка текстового значения (счетчик / прочность)
         context.drawTextWithShadow(client.textRenderer, numberPart, x + leftElementWidth, y, 0xFFFFFFFF);
 
-        // Draw the durability progress bar on the bottom edge of the plate
+        // Индикатор полоски прочности
         if (isDamageable) {
             int maxDamage = stack.getMaxDamage();
             int currentDamage = stack.getDamage();
@@ -109,14 +106,14 @@ public class HudRenderUtils {
 
             int barWidth = 25;
             int barHeight = 2;
-            int barX = x + (textWidth / 2) - (barWidth / 2); // Centering
-            int barY = useIcons ? y + 11 : y + 9;;
+            int barX = x + (textWidth / 2) - (barWidth / 2); // Центрирование
+            int barY = useIcons ? y + 11 : y + 9;
 
-            // Durability bar outline
+            // Обводка полоски прочности
             context.fill(barX - 1, barY - 1, barX + barWidth + 1, barY + barHeight + 1, 0xFF000000);
 
-            // Smooth color transition (from green to red)
-            int barColor = net.minecraft.util.math.MathHelper.hsvToRgb(Math.max(0.0F, durabilityPercent) / 3.0F, 1.0F, 1.0F) | 0xFF000000;
+            // Плавный переход цвета (от зеленого к красному)
+            int barColor = MathHelper.hsvToRgb(Math.max(0.0F, durabilityPercent) / 3.0F, 1.0F, 1.0F) | 0xFF000000;
             int fillWidth = (int) (barWidth * durabilityPercent);
 
             context.fill(barX, barY, barX + fillWidth, barY + barHeight, barColor);

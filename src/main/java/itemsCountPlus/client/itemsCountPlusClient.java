@@ -19,7 +19,7 @@ public class itemsCountPlusClient implements ClientModInitializer {
         // 1. Register Cloth Config
         AutoConfig.register(ModConfig.class, GsonConfigSerializer::new);
 
-        // 2. Register HUD rendering callback hook
+        // 2. Register HUD rendering callback hook for 1.21.x
         HudRenderCallback.EVENT.register((DrawContext context, RenderTickCounter tickCounter) -> {
             MinecraftClient client = MinecraftClient.getInstance();
             ClientPlayerEntity player = client.player;

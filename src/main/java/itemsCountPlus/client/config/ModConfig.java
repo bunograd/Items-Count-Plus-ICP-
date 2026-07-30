@@ -33,6 +33,10 @@ public class ModConfig implements ConfigData {
         @ConfigEntry.ColorPicker
         public int letterColor;
 
+        // Required no-args constructor for Cloth Config reflection operations
+        public HandSettings() {
+        }
+
         public HandSettings(int defaultColor, PositionGrid defaultPos) {
             this.letterColor = defaultColor;
             this.position = defaultPos;

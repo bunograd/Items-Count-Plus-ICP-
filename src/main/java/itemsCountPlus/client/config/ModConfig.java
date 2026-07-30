@@ -7,40 +7,41 @@ import me.shedaniel.autoconfig.annotation.ConfigEntry;
 @Config(name = "items_count_plus")
 public class ModConfig implements ConfigData {
 
-    // MOVED TO THE VERY TOP: Main toggle buttons for indicators
     @ConfigEntry.Category("main")
     public boolean leftHandVisible = true;
 
     @ConfigEntry.Category("main")
     public boolean rightHandVisible = true;
 
-    // CATEGORY FOR LEFT HAND (Collapsible folder under the main buttons)
+    @ConfigEntry.Category("main")
+    public boolean useIcons = false;
+
     @ConfigEntry.Gui.CollapsibleObject
     @ConfigEntry.Category("left_hand_settings")
-    public HandSettings leftHand = new HandSettings(0x0000FF); // Blue by default
+    public HandSettings leftHand = new HandSettings(0x0000FF, PositionGrid.HOTBAR_SIDE);
 
-    // CATEGORY FOR RIGHT HAND (Collapsible folder under the main buttons)
     @ConfigEntry.Gui.CollapsibleObject
     @ConfigEntry.Category("right_hand_settings")
-    public HandSettings rightHand = new HandSettings(0xFF0000); // Red by default
+    public HandSettings rightHand = new HandSettings(0xFF0000, PositionGrid.HOTBAR_SIDE);
 
     public static class HandSettings {
-        // The visible field has been removed from inside, as the buttons are now at the very top of the main screen!
 
+        @ConfigEntry.Gui.EnumHandler(option = ConfigEntry.Gui.EnumHandler.EnumDisplayOption.BUTTON)
         @ConfigEntry.Gui.Tooltip
-        public HeightPos heightPos = HeightPos.HOTBAR;
-
-        @ConfigEntry.Gui.Tooltip
-        public LengthPos lengthPos = LengthPos.SIDE;
+        public PositionGrid position = PositionGrid.HOTBAR_SIDE;
 
         @ConfigEntry.ColorPicker
         public int letterColor;
 
-        public HandSettings(int defaultColor) {
+        public HandSettings(int defaultColor, PositionGrid defaultPos) {
             this.letterColor = defaultColor;
+            this.position = defaultPos;
         }
     }
 
-    public enum HeightPos { HOTBAR, CENTER, TOP }
-    public enum LengthPos { SIDE, CENTER }
+    public enum PositionGrid {
+        TOP_SIDE,    TOP_CENTER,
+        CENTER_SIDE, CENTER_CENTER,
+        HOTBAR_SIDE, HOTBAR_CENTER
+    }
 }

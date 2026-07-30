@@ -1,0 +1,59 @@
+{
+  "hud.hand.left": "L",
+  "hud.hand.right": "R",
+  "text.autoconfig.items_count_plus.title": "Handindikatoren Konfiguration",
+  "text.autoconfig.items_count_plus.category.main": "Hauptoptionen",
+  "text.autoconfig.items_count_plus.category.left_hand_settings": "Linke Hand",
+  "text.autoconfig.items_count_plus.category.right_hand_settings": "Rechte Hand",
+
+  "text.autoconfig.items_count_plus.option.useIcons": "Item-Icons anstelle von Buchstaben verwenden",
+  "text.autoconfig.items_count_plus.option.useIcons.@Tooltip": "Wenn aktiviert, werden die Textfarbeneinstellungen in den Indikatoroptionen ignoriert.",
+  "text.autoconfig.items_count_plus.option.leftHandVisible": "Linken Indikator aktivieren",
+  "text.autoconfig.items_count_plus.option.rightHandVisible": "Rechten Indikator aktivieren",
+
+  "text.autoconfig.items_count_plus.option.lockKeybindWithoutModMenu": "Hotkey deaktivieren",
+  "text.autoconfig.items_count_plus.option.lockKeybindWithoutModMenu.@Tooltip": "Deaktiviert das Öffnen des Konfigurationsmenüs per Hotkey (Gravis) im Spiel.\n§c[Warnung]: Funktioniert nur, wenn ModMenu installiert ist, um den Zugriff nicht zu verlieren!"
+,
+
+  "key.items_count_plus.open_config": "Mod-Konfiguration öffnen",
+  "category.items_count_plus.general": "Items Count Plus",
+
+  "text.autoconfig.items_count_plus.option.leftHand": "Einstellungen für die linke Hand",
+  "text.autoconfig.items_count_plus.option.rightHand": "Einstellungen für die rechte Hand",
+
+  "text.autoconfig.items_count_plus.option.leftHand.mainSettings": "Hauptindikatoren-Parameter",
+  "text.autoconfig.items_count_plus.option.rightHand.mainSettings": "Hauptindikatoren-Parameter",
+  "text.autoconfig.items_count_plus.option.leftHand.mainSettings.position": "Bildschirmposition",
+  "text.autoconfig.items_count_plus.option.rightHand.mainSettings.position": "Bildschirmposition",
+  "text.autoconfig.items_count_plus.option.leftHand.mainSettings.position.@Tooltip": "Wähle eine Rasterzelle auf dem Bildschirm aus, in der der Indikator für die linke Hand gerendert werden soll.",
+  "text.autoconfig.items_count_plus.option.rightHand.mainSettings.position.@Tooltip": "Wähle eine Rasterzelle auf dem Bildschirm aus, in der der Indikator für die rechte Hand gerendert werden soll.",
+  "text.autoconfig.items_count_plus.option.leftHand.mainSettings.letterColor": "Farbe des ersten Buchstabens",
+  "text.autoconfig.items_count_plus.option.rightHand.mainSettings.letterColor": "Farbe des ersten Buchstabens",
+  "text.autoconfig.items_count_plus.option.leftHand.mainSettings.letterColor.@Tooltip": "Wählen Sie eine benutzerdefinierte Farbe für den textbasierten Layout-Buchstaben. §c[HINWEIS: Wenn Item-Icons auf dem Hauptbildschirm aktiviert sind, wird diese Farbeinstellung ignoriert!]",
+  "text.autoconfig.items_count_plus.option.rightHand.mainSettings.letterColor.@Tooltip": "Wählen Sie eine benutzerdefinierte Farbe für den textbasierten Layout-Buchstaben. §c[HINWEIS: Wenn Item-Icons auf dem Hauptbildschirm aktiviert sind, wird diese Farbeinstellung ignoriert!]",
+
+  "text.autoconfig.items_count_plus.option.leftHand.background": "Hintergrundplatten-Einstellungen",
+  "text.autoconfig.items_count_plus.option.rightHand.background": "Hintergrundplatten-Einstellungen",
+  "text.autoconfig.items_count_plus.option.leftHand.background.drawBackground": "Hintergrundplatte aktivieren",
+  "text.autoconfig.items_count_plus.option.rightHand.background.drawBackground": "Hintergrundplatte aktivieren",
+  "text.autoconfig.items_count_plus.option.leftHand.background.drawBackground.@Tooltip": "Schaltet die halbtransparente schwarze Überlagerung unter dem Indikator-Layout um.",
+  "text.autoconfig.items_count_plus.option.rightHand.background.drawBackground.@Tooltip": "Schaltet die halbtransparente schwarze Überlagerung unter dem Indikator-Layout um.",
+  "text.autoconfig.items_count_plus.option.leftHand.background.backgroundColor": "Benutzerdefinierte Hintergrundfarbe",
+  "text.autoconfig.items_count_plus.option.rightHand.background.backgroundColor": "Benutzerdefinierte Hintergrundfarbe",
+  "text.autoconfig.items_count_plus.option.leftHand.background.backgroundColor.@Tooltip": "Legen Sie einen benutzerdefinierten RGB-Farbton für den hintergrund der Platte fest.",
+  "text.autoconfig.items_count_plus.option.rightHand.background.backgroundColor.@Tooltip": "Legen Sie einen benutzerdefinierten RGB-Farbton für den hintergrund der Platte fest.",
+  "text.autoconfig.items_count_plus.option.leftHand.background.backgroundOpacity": "Hintergrunddeckkraft",
+  "text.autoconfig.items_count_plus.option.rightHand.background.backgroundOpacity": "Hintergrunddeckkraft",
+  "text.autoconfig.items_count_plus.option.leftHand.background.backgroundOpacity.@Tooltip": "Passen Sie die Hintergrunddichte an (0 für völlig klar, 255 für Volltonfarbe).",
+  "text.autoconfig.items_count_plus.option.rightHand.background.backgroundOpacity.@Tooltip": "Passen Sie die Hintergrunddichte an (0 für völlig klar, 255 für Volltonfarbe).",
+
+  "text.autoconfig.items_count_plus.enum.PositionGrid.TOP_SIDE": "Oben an den Rändern",
+  "text.autoconfig.items_count_plus.enum.PositionGrid.TOP_CENTER": "Oben in der Mitte",
+  "text.autoconfig.items_count_plus.enum.PositionGrid.CENTER_SIDE": "Mitte an den Rändern",
+  "text.autoconfig.items_count_plus.enum.PositionGrid.CENTER_CENTER": "Bildschirmmitte",
+  "text.autoconfig.items_count_plus.enum.PositionGrid.HOTBAR_SIDE": "Hotbar-Ränder",
+  "text.autoconfig.items_count_plus.enum.PositionGrid.HOTBAR_CENTER": "Hotbar-Enden",
+
+  "modmenu.summaryTranslation.items_count_plus": "Zeigt die Gesamtzahl der Blöcke und die Haltbarkeit der Werkzeuge auf Ihrem Bildschirm an.",
+  "modmenu.descriptionTranslation.items_count_plus": "Ein hochgradig anpassbares HUD-Mod. Es zeigt die kombinierte Anzahl identischer Blöcke in Ihrem gesamten Inventar an. Für Werkzeuge und Rüstungen wird die exakte verbleibende Haltbarkeit zusammen mit einer eleganten Fortschrittsleiste angezeigt. Passt sich perfekt an Links- und Rechtshänder an."
+}

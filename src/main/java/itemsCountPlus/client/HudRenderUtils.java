@@ -18,7 +18,7 @@ public class HudRenderUtils {
         int x = 0;
         int y = 0;
 
-        switch (settings.position) {
+        switch (settings.mainSettings.position) {
             case TOP_SIDE:
                 y = 15;
                 x = isLeftIndicator ? 20 : screenWidth - 60;
@@ -49,7 +49,7 @@ public class HudRenderUtils {
         String valueText = "";
         boolean isDamageable = stack.isDamageable();
 
-        // Расчет прочности или общего количества предметов в инвентаре (Полностью совместимо с 1.21.x)
+        // Calculation of durability or total item count in inventory (Fully compatible with 1.21.x)
         if (isDamageable) {
             int maxDamage = stack.getMaxDamage();
             int currentDamage = stack.getDamage();
@@ -65,40 +65,49 @@ public class HudRenderUtils {
             valueText = String.valueOf(totalCount);
         }
 
-        // Выравнивание габаритов интерфейса (Иконка занимает стандартные 16х16 или 11х11 в зависимости от сетки)
+        // Aligning UI dimensions (Icon takes default 16x16 or 11x11 depending on the grid)
         int leftElementWidth = useIcons ? 14 : client.textRenderer.getWidth(letter);
         String numberPart = ": " + valueText;
         int textWidth = leftElementWidth + client.textRenderer.getWidth(numberPart);
         int textHeight = 8;
 
-        // Настройка отступов для заднего фона
+        // Configuring padding for the background plates
         int paddingX = 4;
         int paddingYTop = useIcons ? 4 : 3;
         int paddingYBottom = isDamageable ? 5 : (useIcons ? 4 : 3);
 
-        // Отрисовка полупрозрачной плашки фона (0x7F000000)
-        context.fill(
-                x - paddingX,
-                y - paddingYTop,
-                x + textWidth + paddingX,
-                y + textHeight + paddingYBottom,
-                0x7F000000
-        );
+        // Rendering the translucent background plate (0x7F000000)
+        if (settings.background.drawBackground) {
+            // Extract opacity (Alpha channel) from background settings
+            int alpha = settings.background.backgroundOpacity << 24;
+            // Extract the player-selected RGB color, clearing any potential old alpha bits
+            int rgb = settings.background.backgroundColor & 0x00FFFFFF;
+            // Combine alpha channel and color into final ARGB format for Minecraft
+            int finalBgColor = alpha | rgb;
 
-        // Безопасный рендеринг иконки или буквы без использования MatrixStack
+            context.fill(
+                    x - paddingX,
+                    y - paddingYTop,
+                    x + textWidth + paddingX,
+                    y + textHeight + paddingYBottom,
+                    finalBgColor
+            );
+        }
+
+        // Safe rendering of an icon or letter without using MatrixStack
         if (useIcons) {
-            // Напрямую передаем координаты в DrawContext. В 1.21.11 drawItem отрисовывает
-            // предмет в оригинальном размере. Для смещения по высоте используем y - 4.
+            // Pass coordinates directly to DrawContext. In 1.21.1 drawItem renders
+            // the item at its original size. Using y - 4 for height offset.
             context.drawItem(stack, x, y - 4);
         } else {
-            int argbColor = settings.letterColor | 0xFF000000;
+            int argbColor = settings.mainSettings.letterColor | 0xFF000000;
             context.drawTextWithShadow(client.textRenderer, letter, x, y, argbColor);
         }
 
-        // Отрисовка текстового значения (счетчик / прочность)
+        // Rendering the text value (counter / durability)
         context.drawTextWithShadow(client.textRenderer, numberPart, x + leftElementWidth, y, 0xFFFFFFFF);
 
-        // Индикатор полоски прочности
+        // Durability bar indicator
         if (isDamageable) {
             int maxDamage = stack.getMaxDamage();
             int currentDamage = stack.getDamage();
@@ -106,13 +115,13 @@ public class HudRenderUtils {
 
             int barWidth = 25;
             int barHeight = 2;
-            int barX = x + (textWidth / 2) - (barWidth / 2); // Центрирование
+            int barX = x + (textWidth / 2) - (barWidth / 2); // Centering
             int barY = useIcons ? y + 11 : y + 9;
 
-            // Обводка полоски прочности
+            // Durability bar outline
             context.fill(barX - 1, barY - 1, barX + barWidth + 1, barY + barHeight + 1, 0xFF000000);
 
-            // Плавный переход цвета (от зеленого к красному)
+            // Smooth color transition (from green to red)
             int barColor = MathHelper.hsvToRgb(Math.max(0.0F, durabilityPercent) / 3.0F, 1.0F, 1.0F) | 0xFF000000;
             int fillWidth = (int) (barWidth * durabilityPercent);
 
